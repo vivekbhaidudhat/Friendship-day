@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Friendship Day</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      transition: background-color 1s ease;
+    }
+
+    .card, .wish-image {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff4b2b;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .emoji {
+      font-size: 2.5em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .wish-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff4b2b;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .wish-button:hover {
+      background-color: #e73515;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 5s infinite ease-in;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.7; }
+      100% { transform: translateY(-700px) rotate(45deg); opacity: 0; }
+    }
+
+    .wish-image {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wish-image img {
+      max-width: 90vw;
+      max-height: 70vh;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .wish-image h2 {
+      margin-top: 20px;
+      color: #ff4b2b;
+    }
+
+    .credit {
+      font-size: 0.8em;
+      color: #999;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Initial Card -->
+  <div class="card" id="mainCard">
+    <div class="emoji">🤗💖🫂</div>
+    <h1>Happy Friendship Day!</h1>
+    <p>kaleja<br>Let’s celebrate our friendship forever!</p>
+    <div class="emoji">🎉🌟🥳</div>
+    <div class="wish-button" onclick="showWish()">   click on👉 🎁</div>
+  </div>
+
+  <!-- Hidden Wish Section -->
+  <div class="wish-image" id="wishImage">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJH4lAq-CZLuIM_r52YkoobxPtC2mtQtgU9w&s" alt="Friendship Wish Image" />
+    <h2>Wishing You a Beautiful Friendship Day! 💞</h2>
+    <p class="credit">Made with 💖 by Vivek</p>
+  </div>
+
+  <!-- JS for background + hearts + switching content -->
+  <script>
+    const colors = ["#f9c5d1", "#a1c4fd", "#d4fc79", "#fddb92", "#fbc2eb", "#fdc5f5"];
+    let index = 0;
+
+    setInterval(() => {
+      document.body.style.backgroundColor = colors[index];
+      index = (index + 1) % colors.length;
+    }, 2000);
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "100vh";
+      heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+
+    function showWish() {
+      document.getElementById("mainCard").style.display = "none";
+      document.getElementById("wishImage").style.display = "flex";
+    }
+  </script>
+
+</body>
+</html>
